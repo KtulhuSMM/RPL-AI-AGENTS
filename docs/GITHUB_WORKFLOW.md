@@ -3,25 +3,43 @@
 ## Repository convention
 
 - Local root directory: `RPL AI AGENT`
-- Separate GitHub repository slug: `RPL-AI-AGENT`
+- GitHub repository: `KtulhuSMM/RPL-AI-AGENTS`
 - Main remote: `origin`
 
-GitHub does not provide free-standing folders outside repositories, so the project should live in its own repository named `RPL-AI-AGENT` rather than as an unrelated folder on the GitHub account.
+Remote `origin` должен указывать на:
+
+```text
+https://github.com/KtulhuSMM/RPL-AI-AGENTS.git
+```
+
+Проверка:
+
+```bash
+git remote -v
+```
+
+Если `origin` настроен неверно:
+
+```bash
+git remote set-url origin https://github.com/KtulhuSMM/RPL-AI-AGENTS.git
+```
 
 ## One-time setup
 
-After creating the repository on GitHub, initialize/configure the local project:
+Для локальной папки проекта:
 
 ```bash
 git init
 git branch -M main
-git remote add origin <YOUR_RPL_AI_AGENT_REPOSITORY_URL>
+git remote add origin https://github.com/KtulhuSMM/RPL-AI-AGENTS.git
 git add -A
 git commit -m "chore: initialize RPL AI Agent"
 git push -u origin main
 ```
 
-Never place a personal access token or API key directly in this file or in a committed remote URL.
+Если `origin` уже существует, не добавляй его повторно — используй `git remote set-url origin ...`.
+
+Никогда не помещай personal access token, API key или другой секрет в committed remote URL или файлы репозитория.
 
 ## Daily closing rule
 
@@ -31,7 +49,7 @@ The project has a 120-minute daily budget. At the limit the coding agent must ru
 python scripts/project_time.py finish
 ```
 
-Success means the output contains `END_DAY_COMPLETE` and the branch was pushed to `origin`.
+Success means the output contains `END_DAY_COMPLETE` and the current branch was successfully pushed to `origin`, то есть в `KtulhuSMM/RPL-AI-AGENTS`.
 
 Failure means the output contains `END_DAY_FAILED`. In this case the agent must tell the user what blocked the push and must not claim that the GitHub backup exists.
 
